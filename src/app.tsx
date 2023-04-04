@@ -27,62 +27,61 @@ type Image = {
   description: string;
 };
 
-type SeenState = {
-  seen: Set<number>;
-  setSeen: (seen: Set<number>) => void;
-};
-
-type ImageState = {
-  image: Image | undefined;
-  setImage: (image: Image | undefined) => void;
-};
-
-type AnswersState = {
-  answers: boolean[];
-  setAnswers: (answers: boolean[]) => void;
-};
-
 // Helper function to get a random index
 function getRandomIndex(length: number): number {
   return Math.floor(Math.random() * length);
 }
 
 // Function to get a random image and update the "seen" state
-function getRandomImage(
-  images: Image[],
-  { seen, setSeen }: SeenState
-): Image | undefined {
+function getRandomImage(images: Image[], seen: Set<number>): Image {
   // Filter images to only include unseen images
   const unseenImages = images.filter((image, index) => !seen.has(index));
-
-  // If there are no unseen images left, return undefined
-  if (unseenImages.length === 0) {
-    return undefined;
-  }
 
   // Get a random index from the unseen images
   const randomIndex = getRandomIndex(unseenImages.length);
 
   // Get the random image
   const randomImage = unseenImages[randomIndex];
-
   return randomImage;
 }
 
 function handleButtonClick(
   event: PointerEvent,
-  imageState: ImageState,
-  answersState: AnswersState
+  image: Image,
+  answers: boolean[],
+  setAnswers: (answers: boolean[]) => void,
+  uid: string
 ) {
   event.preventDefault();
-  const target = event.target as HTMLButtonElement;
-  if (target.id === "ai-button" && imageState.image?.ai) {
-    answersState.setAnswers([...answersState.answers, true]);
-  } else if (target.id === "photographer-button" && !imageState.image?.ai) {
-    answersState.setAnswers([...answersState.answers, true]);
-  } else {
-    answersState.setAnswers([...answersState.answers, false]);
+  const target = event.currentTarget as HTMLButtonElement;
+  let result;
+  switch (target.id) {
+    case "ai-button":
+      result = image?.ai === true;
+      setAnswers([...answers, result]);
+      break;
+    case "photographer-button":
+      result = image?.ai === false;
+      setAnswers([...answers, result]);
+      break;
+    default:
+      result = false;
+      setAnswers([...answers, result]);
+      break;
   }
+  const http = new XMLHttpRequest();
+  const url =
+    "https://6vie3qffydjfjp6hsyy553piqq0zeata.lambda-url.eu-central-1.on.aws/";
+  http.open("POST", url);
+  http.send(
+    JSON.stringify({
+      uid: uid,
+      photo: image.file,
+      result: result,
+      url: document.URL,
+      ref: document.referrer,
+    })
+  );
 }
 
 const formatter = new Intl.NumberFormat("cs-CZ", {
@@ -92,30 +91,24 @@ const formatter = new Intl.NumberFormat("cs-CZ", {
 
 export function App() {
   const [seen, setSeen] = useState<Set<number>>(new Set());
-  const seenState: SeenState = { seen, setSeen };
-  const [image, setImage] = useState(getRandomImage(data, seenState));
-  const imageState: ImageState = { image, setImage };
+  const [image, setImage] = useState(getRandomImage(data, seen));
   const [answers, setAnswers] = useState<boolean[]>([]);
-  const answersState: AnswersState = { answers, setAnswers };
+  const [uid, setUid] = useState<string>(crypto.randomUUID());
 
   useEffect(() => {
-    if (image) {
-      const newIndex = data.indexOf(image);
-      setSeen((prevSeen) => {
-        return prevSeen.add(newIndex);
-      });
+    if (answers.length > 0 && answers.length < data.length) {
+      const newImage = getRandomImage(data, seen);
+      setImage(newImage);
     }
-  }, [image]);
-
-  useEffect(() => {
-    if (answers && answers.length > 0) {
-      setImage(getRandomImage(data, seenState));
-    }
-  }, [answers]);
-
-  useEffect(() => {
     postHeightMessage();
   }, [answers]);
+
+  useEffect(() => {
+    const newIndex = data.indexOf(image);
+    setSeen((prevSeen) => {
+      return prevSeen.add(newIndex);
+    });
+  }, [image]);
 
   const { height, width } = useWindowsDimensions();
   const { containerRef, postHeightMessage } =
@@ -143,7 +136,7 @@ export function App() {
                 }
                 id="photographer-button"
                 onPointerDown={(event: PointerEvent) =>
-                  handleButtonClick(event, imageState, answersState)
+                  handleButtonClick(event, image, answers, setAnswers, uid)
                 }
               >
                 Fotograf
@@ -155,7 +148,7 @@ export function App() {
                 }
                 id="ai-button"
                 onPointerDown={(event: PointerEvent) =>
-                  handleButtonClick(event, imageState, answersState)
+                  handleButtonClick(event, image, answers, setAnswers, uid)
                 }
               >
                 {width > 450 ? "Umělá inteligence" : "AI"}
