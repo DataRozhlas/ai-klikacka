@@ -18,6 +18,7 @@ import data from "./assets/data.json";
 import "./app.css";
 import ResultsContainer from "./components/ResultsContainer";
 import useWindowsDimensions from "./hooks/useWindowsDimensions";
+import { usePostMessageWithHeight } from "./hooks/usePostHeightMessage";
 
 // Define types
 type Image = {
@@ -71,7 +72,6 @@ function getRandomImage(
 function handleButtonClick(
   event: PointerEvent,
   imageState: ImageState,
-  seenState: SeenState,
   answersState: AnswersState
 ) {
   event.preventDefault();
@@ -83,7 +83,6 @@ function handleButtonClick(
   } else {
     answersState.setAnswers([...answersState.answers, false]);
   }
-  imageState.setImage(getRandomImage(data, seenState));
 }
 
 const formatter = new Intl.NumberFormat("cs-CZ", {
@@ -101,14 +100,29 @@ export function App() {
 
   useEffect(() => {
     if (image) {
-      setSeen(seen.add(data.indexOf(image)));
+      const newIndex = data.indexOf(image);
+      setSeen((prevSeen) => {
+        return prevSeen.add(newIndex);
+      });
     }
   }, [image]);
 
+  useEffect(() => {
+    if (answers && answers.length > 0) {
+      setImage(getRandomImage(data, seenState));
+    }
+  }, [answers]);
+
+  useEffect(() => {
+    postHeightMessage();
+  }, [answers]);
+
   const { height, width } = useWindowsDimensions();
+  const { containerRef, postHeightMessage } =
+    usePostMessageWithHeight("ai-klikacka");
 
   return (
-    <Container maxW={"620px"} centerContent p={0}>
+    <Container maxW={"620px"} centerContent p={0} ref={containerRef}>
       <Stack spacing={4} w={"100%"}>
         {answers.length < data.length && (
           <>
@@ -129,7 +143,7 @@ export function App() {
                 }
                 id="photographer-button"
                 onPointerDown={(event: PointerEvent) =>
-                  handleButtonClick(event, imageState, seenState, answersState)
+                  handleButtonClick(event, imageState, answersState)
                 }
               >
                 Fotograf
@@ -141,7 +155,7 @@ export function App() {
                 }
                 id="ai-button"
                 onPointerDown={(event: PointerEvent) =>
-                  handleButtonClick(event, imageState, seenState, answersState)
+                  handleButtonClick(event, imageState, answersState)
                 }
               >
                 {width > 450 ? "Umělá inteligence" : "AI"}

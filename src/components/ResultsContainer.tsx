@@ -23,7 +23,6 @@ const ResultsContainer: FunctionComponent<MyComponentProps> = ({
     let seenArray = Array.from(seen);
     if (seenArray.length > answers.length) {
       seenArray.pop();
-      console.log("usráno");
     }
     return { answer: answer, image: data[seenArray[index]] };
   });

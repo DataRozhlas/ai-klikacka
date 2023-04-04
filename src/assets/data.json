@@ -97,4 +97,9 @@
     "file": "zeman.jpg",
     "ai": false,
     "description":"Bývalý prezident Miloš Zeman vítal 13. září 2022 na Pražském hradě prezidenta Černé Hory Mila Djukanoviće. Takto ho na místě zachytil fotograf serveru iROZHLAS.cz René Volfík."
+},
+{
+    "file": "donalddva.png",
+    "ai": true,
+    "description":"Vygenerovala Midjourney 5 na základě zadání: Donald Trump on his presidential rally surrounded by his fans in the background. Photorealistic."
 }]
