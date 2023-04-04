@@ -19,14 +19,21 @@ const ResultsContainer: FunctionComponent<MyComponentProps> = ({
   seen,
   data,
 }) => {
-  const reversedAnswers = answers.slice().reverse();
-  const reversedSeen = Array.from(seen).slice().reverse();
-  console.log(reversedAnswers);
+  const AnswersImages = answers.map((answer, index) => {
+    let seenArray = Array.from(seen);
+    if (seenArray.length > answers.length) {
+      seenArray.pop();
+      console.log("usráno");
+    }
+    return { answer: answer, image: data[seenArray[index]] };
+  });
+  const reversedAnswersImages = AnswersImages.reverse();
+
   return (
     <Box>
       <Stack spacing={5}>
-        {reversedAnswers.map((answer, index) => (
-          <ResultItem answer={answer} image={data[reversedSeen[index]]} />
+        {reversedAnswersImages.map((answer) => (
+          <ResultItem answer={answer.answer} image={answer.image} />
         ))}
       </Stack>
     </Box>

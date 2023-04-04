@@ -1,9 +1,10 @@
+import { useRef, useCallback, useEffect } from "preact/hooks";
 import { debounce } from "lodash";
 
-export const usePostMessageWithHeight = id => {
-  const containerRef = React.useRef(null);
+export const usePostMessageWithHeight = (id: string) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const postHeightMessage = React.useCallback(() => {
+  const postHeightMessage = useCallback(() => {
     if (containerRef.current) {
       const { height } = containerRef.current.getBoundingClientRect();
       if (window.parent) {
@@ -19,7 +20,7 @@ export const usePostMessageWithHeight = id => {
     }
   }, [id]);
 
-  const onResize = React.useCallback(
+  const onResize = useCallback(
     debounce(() => {
       postHeightMessage();
       setTimeout(() => postHeightMessage(), 300);
@@ -29,7 +30,7 @@ export const usePostMessageWithHeight = id => {
     [postHeightMessage]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     onResize();
 
     window.addEventListener("resize", onResize);

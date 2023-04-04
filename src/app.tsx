@@ -69,15 +69,16 @@ function getRandomImage(
 }
 
 function handleButtonClick(
-  event: MouseEvent,
+  event: PointerEvent,
   imageState: ImageState,
   seenState: SeenState,
   answersState: AnswersState
 ) {
+  event.preventDefault();
   const target = event.target as HTMLButtonElement;
-  if (target.innerText === "Umělá inteligence" && imageState.image?.ai) {
+  if (target.id === "ai-button" && imageState.image?.ai) {
     answersState.setAnswers([...answersState.answers, true]);
-  } else if (target.innerText === "Fotograf" && !imageState.image?.ai) {
+  } else if (target.id === "photographer-button" && !imageState.image?.ai) {
     answersState.setAnswers([...answersState.answers, true]);
   } else {
     answersState.setAnswers([...answersState.answers, false]);
@@ -111,7 +112,7 @@ export function App() {
       <Stack spacing={4} w={"100%"}>
         {answers.length < data.length && (
           <>
-            <Heading as={"h1"} size={"xl"}>
+            <Heading as={"h1"} size={["lg", "xl"]}>
               <Center>Kdo vytvořil tento obrázek?</Center>
             </Heading>{" "}
             <ButtonGroup
@@ -126,7 +127,8 @@ export function App() {
                 leftIcon={
                   <Icon icon="icons8:old-time-camera" width={36} height={36} />
                 }
-                onClick={(event: MouseEvent) =>
+                id="photographer-button"
+                onPointerDown={(event: PointerEvent) =>
                   handleButtonClick(event, imageState, seenState, answersState)
                 }
               >
@@ -137,7 +139,8 @@ export function App() {
                 leftIcon={
                   <Icon icon="teenyicons:robot-solid" width={30} height={30} />
                 }
-                onClick={(event: MouseEvent) =>
+                id="ai-button"
+                onPointerDown={(event: PointerEvent) =>
                   handleButtonClick(event, imageState, seenState, answersState)
                 }
               >
