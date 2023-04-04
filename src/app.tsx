@@ -11,11 +11,13 @@ import {
   Stat,
   StatLabel,
   StatNumber,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import data from "./assets/data.json";
 import "./app.css";
 import ResultsContainer from "./components/ResultsContainer";
+import useWindowsDimensions from "./hooks/useWindowsDimensions";
 
 // Define types
 type Image = {
@@ -80,9 +82,7 @@ function handleButtonClick(
   } else {
     answersState.setAnswers([...answersState.answers, false]);
   }
-  setTimeout(() => {
-    imageState.setImage(getRandomImage(data, seenState));
-  }, 0);
+  imageState.setImage(getRandomImage(data, seenState));
 }
 
 const formatter = new Intl.NumberFormat("cs-CZ", {
@@ -104,8 +104,10 @@ export function App() {
     }
   }, [image]);
 
+  const { height, width } = useWindowsDimensions();
+
   return (
-    <Container maxW={"620px"} centerContent>
+    <Container maxW={"620px"} centerContent p={0}>
       <Stack spacing={4} w={"100%"}>
         {answers.length < data.length && (
           <>
@@ -139,10 +141,21 @@ export function App() {
                   handleButtonClick(event, imageState, seenState, answersState)
                 }
               >
-                Umělá inteligence
+                {width > 450 ? "Umělá inteligence" : "AI"}
               </Button>
             </ButtonGroup>
-            <Image src={image?.file} borderRadius={8} fit="contain"></Image>
+            <Image
+              src={`https://data.irozhlas.cz/ai-klikacka/${image?.file}`}
+              borderRadius={8}
+              fit="contain"
+              fallback={
+                <Box w={"100%"} style={"aspect-ratio:3/2;"}>
+                  <Center>
+                    <CircularProgress isIndeterminate color="red.600" />
+                  </Center>
+                </Box>
+              }
+            ></Image>
           </>
         )}
         {answers.length > 0 && (

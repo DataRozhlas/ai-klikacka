@@ -21,6 +21,7 @@ const ResultItem: FunctionComponent<MyComponentProps> = ({ answer, image }) => {
         src={image.file}
         alt={image.description}
         mr={2}
+        borderRadius={8}
       />
       <Heading as={"h3"} size={"sm"} color={answer ? "green" : "red"}>
         {answer ? "Správně!" : "Špatně!"}

@@ -23,7 +23,7 @@ const ResultsContainer: FunctionComponent<MyComponentProps> = ({
   const reversedSeen = Array.from(seen).slice().reverse();
   console.log(reversedAnswers);
   return (
-    <Box style="max-height: 12rem; overflow-x:hidden;">
+    <Box>
       <Stack spacing={5}>
         {reversedAnswers.map((answer, index) => (
           <ResultItem answer={answer} image={data[reversedSeen[index]]} />
