@@ -1,0 +1,100 @@
+[{
+    "file": "turistka.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: Asian tourist taking a selfie in front of Prague Castle. Photorealistic."
+},
+{
+    "file": "tomcruise.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: Film award ceremony. The image shows happy and thankfull actor Tom Cruise in formal dress receiving an academy award. He holds small golden statue, called Oscar, in both hands. Camera flash. Glamour. Photorealistic. News photo."
+},
+{
+    "file": "tourdefrance.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: Cyclist during the Tour de France race. This cyclist is captured in detail in the foreground, He is the only one in a yellow cycling jersey. The group of cyclists in the background have different colored jerseys. Weather is sunny. Photorealistic"
+},
+{
+    "file": "demonstrace.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: People demonstrating in Prague against the government. The image looks like a news photo, focusing on the face of one of the demonstrators"
+},
+{
+    "file": "racek.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: A seagull captured in detail flying over the beach photorealistic"
+},
+{
+    "file": "politik.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: czech president Vaclav Klaus attending European Commission headquarters in Brussels shaking hands with boring people in suits photo realistic"
+},
+{
+    "file": "generalove.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: A military parade on a russian Red square. A close-up of Vladimir Putin watching the parade from the stands. Around him are generals in uniforms with many decorations. Image is a news photo of unspecified news agency. Photorealistic."
+},
+{
+    "file": "jachta.png",
+    "ai": true,
+    "description": "Vygenerovala Midjourney 5 na základě zadání: Superyacht in the mediterranean sea. Photorealistic."
+},
+{
+    "file": "korea.png",
+    "ai": true,
+    "description":"Vygenerovala Midjourney 5 na základě zadání: President Joe Biden and North Korean leader Kim Jong-un are shaking hands and smile in the demilitarized zone. Photorealistic."
+},
+{
+    "file": "demoska.jpg",
+    "ai": false,
+    "description":"Jde o skutečnou fotografii z demonstrace proti České televizi, kterou pořádal aktivista Ladislav Vrabel. Pořídil ji fotograf serveru iROZHLAS.cz René Volfík 17. listopadu 2022."
+},
+{
+    "file": "donald.jpg",
+    "ai": false,
+    "description":"Tančícího Donalda Trumpa zachytil fotograf agentury Reuters Jonathan Ernst 15. listopadu 2022. Bývalý americký prezident tančí na hudbu před svou manželkou Melanií Trumpovou poté, co během akce ve svém sídle v Mar-a-Lago na Floridě oznámil svou prezidentskou kandidaturu v roce 2024."
+},
+{
+    "file": "kabaret.jpg",
+    "ai": false,
+    "description":"Toto je skutečná fotografie ze zkoušky kabaretu Pot a Lesk, prvního představení v šapitó Azyl78 na Výstavišti Praha Holešovice. Fotografováno René Volfíkem ze serveru iROZHLAS.cz."
+},
+{
+    "file": "mluvci.jpg",
+    "ai": false,
+    "description":"Mluvčí prezidenta Petra Pavla Markétu Řehákovou zachytil po oznámení výsledků druhého kola prezidentských voleb 2023 fotograf serveru iROZHLAS.cz René Volfík."
+},
+{
+    "file": "obama.jpg",
+    "ai": false,
+    "description":"Toto je skutečná fotografie pořízená fotografem Bílého domu Chuckem Kennedym. Bývalý americký prezident Barack Obama na ní skládá přísahu jako čerstvě zvolený 44. prezident USA. Společně s ním jsou na fotografii zachyceni jeho manželka Michelle a dcery Malia a Sasha. Fotografie vznikla 20. ledna 2009 před Kapitolem ve Washingtonu (USA)."
+},
+{
+    "file": "vitanipapez.jpg",
+    "ai": false,
+    "description": "Tuto fotografii papeže Františka pořídil fotograf agentury Reuters Max Rossi v roce 2017 během papežovy návštěvy barmského Rangúnu."
+},
+{
+    "file": "papezauto.jpg",
+    "ai": false,
+    "description": "Skutečná fotografie papeže, podepisujícího se na kapotu vozu Lamborghini Huracán, který dostal od italské automobilky, vznikla na podzim 2017. Tehdy papež takto „vyzdobené“ auto vložil do charitativní aukce."
+},
+{
+    "file": "pavel.jpg",
+    "ai": false,
+    "description":"Fotografii prezidenta Petra Pavla pořídil před budovou Českého rozhlasu fotograf serveru iROZHLAS.cz René Volfík. Vznikla po debatě kandidátů před druhým kolem prezidentských voleb 27. ledna 2023."
+},
+{
+    "file": "ptak.jpg",
+    "ai": false,
+    "description":"Racka v letu nad Vltavou u Karlových lázní v Praze zachytil fotograf serveru iROZHLAS.cz René Volfík na podzim 2022."
+},
+{
+    "file": "vitr.jpg",
+    "ai": false,
+    "description":"Fotografii ženy, která se potýká s následky silného větru v pražských ulicích, pořídil fotograf serveru iROZHLAS.cz René Volfík."
+},
+{
+    "file": "zeman.jpg",
+    "ai": false,
+    "description":"Bývalý prezident Miloš Zeman vítal 13. září 2022 na Pražském hradě prezidenta Černé Hory Mila Djukanoviće. Takto ho na místě zachytil fotograf serveru iROZHLAS.cz René Volfík."
+}]
