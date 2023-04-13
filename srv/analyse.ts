@@ -39,14 +39,63 @@ const sortedPhotoSuccess = photoSuccess.sort(
   (a, b) => a.percentage - b.percentage
 );
 
+const AIphotos = items
+  .filter((item: Item) => item.photo.includes(".png"))
+  .map((item: Item) => item.result);
+const humanPhotos = items
+  .filter((item: Item) => item.photo.includes(".jpg"))
+  .map((item: Item) => item.result);
+
+//kolik lidí dokončilo
+const completeGames = Array.from(uniqueIDs).reduce(
+  (acc: number, uid): number => {
+    const gameLength = items.filter((item: Item) => item.uid === uid);
+    if (gameLength.length === 21) {
+      return acc + 1;
+    }
+    return acc;
+  },
+  0
+);
+
+//kolik lidí trefilo všechno
+
+// const successPerUser = Array.from(uniqueIDs).map((uid, index) => {
+//   const userResults = items
+//     .filter((item: Item) => item.uid === uid)
+//     .map((result: Item) => result.result);
+//   console.log(index);
+//   if (userResults.length === 21) {
+//     const result = calculateTruePercentage(userResults);
+//     return result;
+//   }
+//   return -1;
+// });
+
+// const users100 = successPerUser.filter(
+//   (result: number): boolean => result === 100
+// );
+
 console.log("Fotek:", photos.length);
-console.log("Kliků:", items.length);
+console.log("Klikanců:", items.length);
 console.log("Uživatelů (jednotlivých her):", uniqueIDs.size);
+console.log("Dokončených her:", completeGames);
 console.log(
   "Kliknutí na uživatele:",
   Math.round((items.length / uniqueIDs.size) * 100) / 100
 );
+// console.log("Uživatelé s úspěšností 100 %:", users100.length);
 console.log("Průměrná úspěšnost:", calculateTruePercentage(answers), "%");
+console.log(
+  "Úspěšnost u fotek generovaných AI:",
+  calculateTruePercentage(AIphotos),
+  "%"
+);
+console.log(
+  "Úspěšnost u fotek od fotografů:",
+  calculateTruePercentage(humanPhotos),
+  "%"
+);
 console.log("Fotky podle úspěšnosti:");
 sortedPhotoSuccess.forEach((photo) => {
   console.log(photo.photo, photo.percentage, "%");

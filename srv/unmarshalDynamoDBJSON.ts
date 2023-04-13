@@ -75,7 +75,7 @@ async function unmarshalDynamoDBJSON(
   inputFile.close();
 }
 
-const inputFilePath = "./data/3tgarhfgtqyx3gjikhal4jeg4u.json";
+const inputFilePath = "./data/sxna2pxj745n5oe4h3n72rpjjq.json";
 const outputFilePath = "./data/unmarshalled.json";
 
 await unmarshalDynamoDBJSON(inputFilePath, outputFilePath);
