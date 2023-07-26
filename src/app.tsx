@@ -38,7 +38,7 @@ function getRandomImage(images: Image[], seen: Set<number>): Image {
   const unseenImages = images.filter((image, index) => !seen.has(index));
 
   // Get a random index from the unseen images
-  const randomIndex = getRandomIndex(unseenImages.length);
+  const randomIndex = 0;
 
   // Get the random image
   const randomImage = unseenImages[randomIndex];
